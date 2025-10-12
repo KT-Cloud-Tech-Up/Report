@@ -69,17 +69,4 @@
 
 ---
 
-## 3️⃣ 실제 동작 예시
-
-### 💡 회원 정보 수정 (Update) 요청 예시
-
-```bash
-PUT /users/3
-Content-Type: application/json
-
-{
-  "name": "홍길동",
-  "email": "hong@example.com"
-}
-
 
