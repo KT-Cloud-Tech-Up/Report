@@ -81,6 +81,9 @@
     "skills": ["Java", "Spring", "React"]
   }
 }
+```
+
+#### 🟢 xml
 
 ```xml
 <user>
@@ -93,6 +96,9 @@
     <skill>React</skill>
   </skills>
 </user>
+```
+
+#### 🟢 yml
 
 ```yml
 user:
@@ -103,7 +109,7 @@ user:
     - Java
     - Spring
     - React
-
+```
 
 ## ⚙️ 3️⃣ JSON, XML, YAML의 기술적 비교
 
