@@ -1,0 +1,23 @@
+{
+  "name": "1001",
+  "version": "1.0.0",
+  "description": "",
+  "main": "hello.js",
+  "scripts": {
+    "start": "node hello.js",
+    "dev": "vite",
+    "build": "tsc"
+  },
+  "keywords": [
+    "typescript",
+    "project"
+  ],
+  "author": "Sehun",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.6.7"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3"
+  }
+}
