@@ -1,0 +1,20 @@
+import { Routes, Route, Router } from "react-router-dom";
+import Home from "../pages/Home";
+import Login from "../pages/Login";
+import Join from "../pages/Join";
+import NoMatch from "../pages/NoMatch.tsx";
+import Calculator from "../pages/Calculator";
+import About from "../pages/About";
+
+export default function RoutesSetUp() {
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/join" element={<Join />} />
+      <Route path="/calculator" element={<Calculator />} />
+      <Route path="/about" element={<About />} />
+      <Route path="*" element={<NoMatch />} />
+    </Routes>
+  );
+}
