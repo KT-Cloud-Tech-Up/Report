@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { LoginContext } from "../context/LoginContext.tsx";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function NavBar() {
   const { isLoggedIn, setIsLoggedIn } = useContext(LoginContext);
@@ -15,9 +15,12 @@ export default function NavBar() {
   return (
     <div className="flex items-center justify-between bg-blue-500 p-4 pl-8 pr-8">
       <div className="text-white font-bold">
-        <a href="/" className="text-white font-bold hover:text-yellow-500">
+        <Link
+          to="/"
+          className="text-white font-bold cursor-pointer hover:text-yellow-500"
+        >
           Home
-        </a>
+        </Link>
       </div>
       <div
         className="flex
@@ -26,20 +29,20 @@ export default function NavBar() {
         {isLoggedIn || localStorage.getItem("token") ? (
           <>
             <div>
-              <a
-                href="/calculator"
-                className="text-white font-bold hover:text-yellow-500"
+              <Link
+                to="calculator"
+                className="text-white font-bold cursor-pointer hover:text-yellow-500"
               >
                 Calculator
-              </a>
+              </Link>
             </div>
             <div>
-              <a
-                href="/about"
-                className="text-white font-bold hover:text-yellow-500"
+              <Link
+                to="about"
+                className="text-white font-bold cursor-pointer hover:text-yellow-500"
               >
                 About
-              </a>
+              </Link>
             </div>
             <div
               className="text-white font-bold cursor-pointer hover:text-yellow-500"
@@ -51,20 +54,20 @@ export default function NavBar() {
         ) : (
           <>
             <div>
-              <a
-                href="/login"
-                className="text-white font-bold hover:text-yellow-500"
+              <Link
+                to="login"
+                className="text-white font-bold cursor-pointer hover:text-yellow-500"
               >
                 Login
-              </a>
+              </Link>
             </div>
             <div>
-              <a
-                href="/join"
-                className="text-white font-bold hover:text-yellow-500"
+              <Link
+                to="join"
+                className="text-white font-bold cursor-pointer hover:text-yellow-500"
               >
                 Join
-              </a>
+              </Link>
             </div>
           </>
         )}

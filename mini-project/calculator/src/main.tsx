@@ -1,7 +1,7 @@
 import { StrictMode, useState } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import RoutesSetup from "./routes/Routes.tsx";
 import NavBar from "./components/NavBar.tsx";
 import { LoginContext } from "./context/LoginContext.tsx";
@@ -11,10 +11,10 @@ function Root() {
 
   return (
     <LoginContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
-      <BrowserRouter>
+      <HashRouter>
         <NavBar />
         <RoutesSetup />
-      </BrowserRouter>
+      </HashRouter>
     </LoginContext.Provider>
   );
 }

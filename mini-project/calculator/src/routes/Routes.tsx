@@ -10,10 +10,10 @@ export default function RoutesSetUp() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/join" element={<Join />} />
-      <Route path="/calculator" element={<Calculator />} />
-      <Route path="/about" element={<About />} />
+      <Route path="login" element={<Login />} />
+      <Route path="join" element={<Join />} />
+      <Route path="calculator" element={<Calculator />} />
+      <Route path="about" element={<About />} />
       <Route path="*" element={<NoMatch />} />
     </Routes>
   );
