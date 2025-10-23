@@ -1,0 +1,64 @@
+<h1>[{{title}}] 글 상세</h1>
+<h2 class="text-xl">글 제목</h2>
+
+<div>
+  작성자 :
+  <b>작성자 이름</b>
+</div>
+
+<div>
+  조회수 : 9999 | 등록일 : 2025-10-22 12:00:00
+  <button onclick="modifyPost()">수정</button>
+  <button onclick="deletePost()">삭제</button>
+</div>
+
+<div>
+  <pre>본문입니다.</pre>
+</div>
+
+<section>
+  <div>
+    <h3>3개의 댓글</h3>
+  </div>
+
+  <form method="post" action="/write-comment">
+    <div>
+      <div>
+        <input type="text" name="commentator" placeholder="이름" />
+        <input type="password" name="password" placeholder="비밀번호" />
+      </div>
+      <div>
+        <textarea
+          name="comment"
+          placeholder="댓글을 입력하세요"
+          cols="40"
+          rows="3"
+        ></textarea>
+        <br />
+        <button type="submit">댓글 작성</button>
+      </div>
+    </div>
+  </form>
+</section>
+
+<section>
+  <div>
+    <div>
+      작성자 :
+      <b>댓글 작성자</b>
+    </div>
+    <div>
+      작성일시 : 2025-10-22 12:00:00
+      <button onclick="deleteComment()">삭제</button>
+    </div>
+  </div>
+  <div>
+    <pre>{{comment}}</pre>
+  </div>
+</section>
+
+<footer>
+  <div>
+    <a href="/">목록으로</a>
+  </div>
+</footer>
