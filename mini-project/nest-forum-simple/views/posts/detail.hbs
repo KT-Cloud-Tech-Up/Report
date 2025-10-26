@@ -1,97 +1,168 @@
-<form action='/posts/update' method='post' id='updateForm'>
-  <input type='hidden' name='postId' id='postId' value='{{data.post.postId}}' />
-  <h2 class='updatePossibleData'>{{data.post.title}}</h2>
-  <input
-    class='updateData'
-    style='display: none;'
-    type='text'
-    name='title'
-    value='{{data.post.title}}'
-    placeholder='{{data.post.title}}'
-  />
+<div
+  style='width: 100%; height: 100%; display: flex; justify-content: start; align-items: center; flex-direction: column; gap: 10px;'
+>
+  <div style='width: 40%; height: 100%; margin-top: 5%;'>
+    <div style=' display: flex; flex-direction: column; gap: 20px;'>
+      <form
+        action='/posts/update'
+        method='post'
+        id='updateForm'
+        style=' display: flex; justify-content: center;flex-direction: column; gap: 10px;'
+      >
+        <input
+          type='hidden'
+          name='postId'
+          id='postId'
+          value='{{data.post.postId}}'
+        />
 
-  <div style='display: flex; flex-direction: row; gap: 10px;'>
-    <p>작성자 : {{data.post.author}}</p>
-    <p>작성일 : {{dateString data.post.createdAt}}</p>
-    <p>수정일 : {{dateString data.post.modifiedAt}}</p>
-  </div>
+        <div
+          style='display: flex; flex-direction: row; justify-content: space-between;'
+        >
+          <h2 class='updatePossibleData'>{{data.post.title}}</h2>
+          <input
+            class='updateData'
+            style='display: none;'
+            type='text'
+            name='title'
+            value='{{data.post.title}}'
+            placeholder='{{data.post.title}}'
+          />
+          <div
+            style='display: flex; flex-direction: row; gap: 20px; justify-content: center; align-items: center; font-size: 0.5rem;'
+          >
+            <button
+              id='changeUpdateModeButton'
+              style=' text-align: center; font-size: 0.6rem; background-color: gray; color: black; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;'
+            >수정</button>
+            <button
+              type='submit'
+              id='realUpdateButton'
+              style='text-align: center; font-size: 0.6rem; display: none; background-color: yellow; color: black; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;'
+            >수정</button>
 
-  <div>
-    <pre class='updatePossibleData'>
+            <button
+              id='realDeleteButton'
+              style='text-align: center; font-size: 0.6rem; background-color: red; color: black; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;'
+            >
+              삭제
+            </button>
+            <button
+              id='cancelUpdateButton'
+              style='text-align: center; font-size: 0.6rem; display: none; background-color: white; color: black; padding: 10px 20px; border: 1px solid black; border-radius: 5px; cursor: pointer;'
+            >
+              취소
+            </button>
+          </div>
+        </div>
+        <div>
+          <p style='font-size: 13px; gap: 0px; margin: 0;'>작성자 :
+            {{data.post.author}}</p>
+          <p style='font-size: 13px;'>작성일 :
+            {{dateString data.post.createdAt}}</p>
+          <p style='font-size: 13px;'>수정일 :
+            {{dateString data.post.modifiedAt}}</p>
+        </div>
+
+        <div>
+          <pre
+            style='width: 100%; height: 70%; '
+            class='updatePossibleData'
+          >
         {{data.post.content}}
-    </pre>
-    <textarea
-      class='updateData'
-      style='display: none;'
-      name='content'
-      placeholder='{{data.post.content}}'
-    >{{data.post.content}}</textarea>
+        </pre>
+          <textarea
+            class='updateData'
+            style='width: 100%; height: 70%; display: none;'
+            name='content'
+            placeholder='{{data.post.content}}'
+          >{{data.post.content}}</textarea>
+        </div>
+      </form>
+
+      <table style='width: 100%; font-size: 13px;'>
+        <thead style='border: 1px solid black;'>
+          <tr>
+            <th
+              style='border: 1px solid gray;text-align: center; width: 40%;'
+            >댓글</th>
+            <th
+              style='border: 1px solid gray;text-align: center; width: 10%;'
+            >닉네임</th>
+            <th
+              style='border: 1px solid gray;text-align: center; width: 15%;'
+            >작성일자</th>
+            <th
+              style='border: 1px solid gray;text-align: center; width: 15%;'
+            >수정일자</th>
+            <th style='border: 1px solid gray;col-span: 1; width: 10%;'></th>
+          </tr>
+        </thead>
+        <tbody id='commentList'>
+          {{#each data.comments}}
+            <tr>
+              <td style='text-align: center;'>{{this.content}}</td>
+              <td style='text-align: center;'>{{this.nickName}}</td>
+              <td style='text-align: center;'>{{dateString this.createdAt}}</td>
+              <td style='text-align: center;'>{{dateString
+                  this.modifiedAt
+                }}</td>
+              <td
+                style='display: flex; justify-content: center; align-items: center;'
+              ><button
+                  style='text-align: center;background-color: red; color: black; padding-top: 5px; padding-bottom: 5px; padding-left: 10px; padding-right: 10px; border: none; border-radius: 5px; cursor: pointer;'
+                  onclick='deleteComment({{this.commentId}})'
+                >삭제</button></td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+
+      <div
+        style='width: 100%; height: 100%; margin-top: 20px; font-size: 13px; display: flex; justify-content: center; align-items: center;'
+      >
+        <form
+          action='/comments'
+          method='post'
+          id='commentForm'
+          style='width: 100%; height: 100%; display: flex; flex-direction: row; gap: 10px; justify-content: space-between; align-items: center;'
+        >
+          <input type='hidden' name='postId' value='{{data.post.postId}}' />
+          <div
+            style='width: 80%; height: 100%; gap: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center;'
+          >
+            <div style='width: 100%; height: 100%;'>
+              <div
+                style='display: flex; flex-direction: row; gap: 10px; justify-content: start; align-items: center; text-align: start;'
+              >
+                닉네임 :
+                <input
+                  type='text'
+                  name='nickName'
+                  placeholder='닉네임을 입력해주세요.'
+                />
+              </div>
+            </div>
+            <textarea
+              type='text'
+              name='content'
+              placeholder='댓글을 입력해주세요.'
+              style='width: 100%; height:80px;'
+            ></textarea>
+          </div>
+          <div
+            style='display: flex; justify-content: center; align-items: center;'
+          >
+            <button
+              type='submit'
+              style='text-align: center; background-color: green; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;'
+            >댓글 작성</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
   </div>
-
-  <div style='display: flex; flex-direction: row; gap: 20px;'>
-    <a href='/posts'>목록으로</a>
-    <button
-      id='changeUpdateModeButton'
-      style='background-color: gray; color: black; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;'
-    >수정</button>
-    <button
-      type='submit'
-      id='realUpdateButton'
-      style='display: none; background-color: yellow; color: black; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;'
-    >수정</button>
-
-    <button
-      id='realDeleteButton'
-      style='background-color: red; color: black; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;'
-    >
-      삭제
-    </button>
-    <button
-      id='cancelUpdateButton'
-      style='display: none; background-color: white; color: black; padding: 10px 20px; border: 1px solid black; border-radius: 5px; cursor: pointer;'
-    >
-      취소
-    </button>
-  </div>
-</form>
-
-<table>
-  <thead>
-    <tr>
-      <th>댓글</th>
-      <th>닉네임</th>
-      <th>작성일자</th>
-      <th>수정일자</th>
-      <th style='col-span: 1;'></th>
-    </tr>
-  </thead>
-  <tbody id='commentList'>
-    {{#each data.comments}}
-      <tr>
-        <td>{{this.content}}</td>
-        <td>{{this.nickName}}</td>
-        <td>{{dateString this.createdAt}}</td>
-        <td>{{dateString this.modifiedAt}}</td>
-        <td><button
-            onclick='deleteComment({{this.commentId}})'
-          >삭제</button></td>
-      </tr>
-    {{/each}}
-  </tbody>
-</table>
-
-<div>
-  <form action='/comments' method='post' id='commentForm'>
-    <input type='hidden' name='postId' value='{{data.post.postId}}' />
-    닉네임 :
-    <input type='text' name='nickName' placeholder='닉네임을 입력해주세요.' />
-    <textarea
-      type='text'
-      name='content'
-      placeholder='댓글을 입력해주세요.'
-    ></textarea>
-    <button type='submit'>댓글 작성</button>
-  </form>
 </div>
 
 <script src='/detail.js'></script>
