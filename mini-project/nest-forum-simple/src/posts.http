@@ -1,0 +1,29 @@
+@server = http://localhost:3000
+
+### 게시글 생성
+POST {{server}}/posts
+Content-Type: application/json
+
+{
+    "title": "test data",
+    "content": "test content",
+    "author": "author"
+}
+
+### 게시글 목록 조회
+GET {{server}}/posts?search=&page=1&limit=10
+
+### 특정 게시글 상세 조회
+GET {{server}}/posts/1
+
+### 특정 게시글 수정
+PUT {{server}}/posts/1
+Content-Type: application/json
+
+{
+    "title": "update test title",
+    "content": "updat test content"
+}
+
+### 특정 게시글 삭제
+DELETE {{server}}/posts/1

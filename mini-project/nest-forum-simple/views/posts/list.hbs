@@ -1,0 +1,87 @@
+<h2>게시글 목록</h2>
+
+<div style='display: flex; flex-direction: row; gap: 10px;'>
+  <input type='text' id='search' name='search' value='{{search.value}}' />
+  <button
+    id='searchButton'
+    style='background-color: blue; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;'
+  >검색</button>
+</div>
+
+<div style='margin-top: 20px; margin-bottom: 20px;'>
+  <table
+    style='border: 1px solid black; border-collapse: collapse; border-spacing: 0;'
+  >
+    <thead style='border: 1px solid black; border-collapse: collapse;'>
+      <tr style='border: 1px solid black;'>
+        <th
+          style='border: 1px solid black; text-align: center; padding: 10px;'
+        >ID</th>
+        <th
+          style='border: 1px solid black; text-align: center; padding: 10px;'
+        >제목</th>
+        <th
+          style='border: 1px solid black; text-align: center; padding: 10px;'
+        >작성자</th>
+        <th
+          style='border: 1px solid black; text-align: center; padding: 10px;'
+        >작성일자</th>
+        <th
+          style='border: 1px solid black; text-align: center; padding: 10px;'
+        >수정일자</th>
+      </tr>
+    </thead>
+    <tbody style='border: 1px solid black;'>
+      {{#each data.posts}}
+        <tr
+          style='border: 1px solid black; border-collapse: collapse; border-spacing: 0;'
+        >
+          <td
+            style='border: 1px solid black; text-align: center; padding: 10px;'
+          >{{this.postId}}</td>
+          <td
+            style='border: 1px solid black; text-align: center; padding: 10px;'
+          ><a href='/posts/{{this.postId}}'>{{this.title}}</a></td>
+          <td
+            style='border: 1px solid black; text-align: center; padding: 10px;'
+          >{{this.author}}</td>
+          <td
+            style='border: 1px solid black; text-align: center; padding: 10px;'
+          >{{dateString this.createdAt}}</td>
+          <td
+            style='border: 1px solid black; text-align: center; padding: 10px;'
+          >{{dateString this.modifiedAt}}</td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
+
+<div>
+  {{#with data.paginator}}
+
+    <a href='/posts?search={{search.value}}&page=1'>&lt;&lt;</a>
+
+    {{#if this.hasPrev}}
+      <a href='/posts?search={{search.value}}&page={{this.prevPage}}'>&lt;</a>
+    {{else}}
+      <a>&lt;</a>
+    {{/if}}
+
+    {{#each this.pageList}}
+      <a href='/posts?search={{search.value}}&page={{this}}'>{{this}}</a>
+    {{/each}}
+
+    {{#if this.hasNext}}
+      <a href='/posts?search={{search.value}}&page={{this.nextPage}}'>&gt;</a>
+    {{else}}
+      <a>&gt;</a>
+    {{/if}}
+
+    <a
+      href='/posts?search={{search.value}}&page={{this.totalPage}}'
+    >&gt;&gt;</a>
+  {{/with}}
+</div>
+
+<script src='/list.js'></script>
